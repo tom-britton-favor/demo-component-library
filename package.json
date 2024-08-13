@@ -1,0 +1,40 @@
+{
+  "name": "vite-web-component-library",
+  "version": "0.0.1",
+  "description": "",
+  "type": "module",
+  "main": "./dist/fvr-components.umd.js",
+  "module": "./dist/fvr-components.es.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/fvr-components.es.js",
+      "require": "./dist/fvr-components.umd.js",
+      "types": "./dist/types/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "vitest",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "build": "vite build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@chromatic-com/storybook": "1.6.1",
+    "@storybook/addon-essentials": "8.2.8",
+    "@storybook/addon-links": "8.2.8",
+    "@storybook/blocks": "8.2.8",
+    "@storybook/test": "8.2.8",
+    "@storybook/web-components": "8.2.8",
+    "@storybook/web-components-vite": "8.2.8",
+    "storybook": "8.2.8",
+    "vite": "5.4.0",
+    "vitest": "2.0.5"
+  }
+}

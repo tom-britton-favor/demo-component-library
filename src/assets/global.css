@@ -1,0 +1,263 @@
+@charset "utf-8";
+/***
+    The new CSS reset - version 1.8.5 (last updated 14.6.2023)
+    GitHub page: https://github.com/elad2412/the-new-css-reset
+***/
+
+/*
+    Remove all the styles of the "User-Agent-Stylesheet", except for the 'display' property
+    - The "symbol *" part is to solve Firefox SVG sprite bug
+    - The "html" attribute is exclud, because otherwise a bug in Chrome breaks the CSS hyphens property (https://github.com/elad2412/the-new-css-reset/issues/36)
+ */
+*:where(
+    :not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)
+  ) {
+  all: unset;
+  display: revert;
+}
+
+/* Preferred box-sizing value */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Reapply the pointer cursor for anchor tags */
+a,
+button {
+  cursor: revert;
+}
+
+/* Remove list styles (bullets/numbers) */
+ol,
+ul,
+menu {
+  list-style: none;
+}
+
+/* For images to not be able to exceed their container */
+img {
+  max-inline-size: 100%;
+  max-block-size: 100%;
+}
+
+/* removes spacing between cells in tables */
+table {
+  border-collapse: collapse;
+}
+
+/* Safari - solving issue when using user-select:none on the <body> text input doesn't working */
+input,
+textarea {
+  -webkit-user-select: auto;
+}
+
+/* revert the 'white-space' property for textarea elements on Safari */
+textarea {
+  white-space: revert;
+}
+
+/* minimum style to allow to style meter element */
+meter {
+  -webkit-appearance: revert;
+  appearance: revert;
+}
+
+/* preformatted text - use only for this feature */
+:where(pre) {
+  all: revert;
+}
+
+/* reset default text opacity of input placeholder */
+::placeholder {
+  color: unset;
+}
+
+/* remove default dot (•) sign */
+::marker {
+  content: initial;
+}
+
+/* fix the feature of 'hidden' attribute.
+   display:revert; revert to element instead of attribute */
+:where([hidden]) {
+  display: none;
+}
+
+/* revert for bug in Chromium browsers
+   - fix for the content editable attribute will work properly.
+   - webkit-user-select: auto; added for Safari in case of using user-select:none on wrapper element */
+:where([contenteditable]:not([contenteditable="false"])) {
+  -moz-user-modify: read-write;
+  -webkit-user-modify: read-write;
+  overflow-wrap: break-word;
+  -webkit-line-break: after-white-space;
+  -webkit-user-select: auto;
+}
+
+/* apply back the draggable feature - exist only in Chromium and Safari */
+:where([draggable="true"]) {
+  -webkit-user-drag: element;
+}
+
+/* Revert Modal native behavior */
+:where(dialog:modal) {
+  all: revert;
+}
+
+/** Design tokens **/
+
+:root {
+  /** Colors **/
+  --white: #ffffff;
+
+  --background-primary: var(--white);
+  --background-raised: var(--white);
+  --background-recessed: #f8f8f8;
+
+  --foreground-primary: #262c33;
+  --foreground-secondary: #5b6670;
+  --foreground-disabled: #abb5bd;
+  --foreground-tint: #e9ebed;
+
+  --blue-primary: #0099e5;
+  --green-primary: #48a82a;
+  --yellow-primary: #ffd500;
+  --red-primary: #ee6258;
+  --gold-primary: #e2a243;
+  --gold-secondary: #c0842b;
+
+  --blue-tint-75: #0099e54b;
+  --green-tint-75: #48a82a4b;
+  --yellow-tint-75: #ffd5004b;
+  --orange-tint-75: #f56f104b;
+  --red-tint-75: #d60e004b;
+
+  --blue-tint-25: #0099e519;
+  --green-tint-25: #48a82a19;
+  --yellow-tint-25: #ffd50019;
+  --orange-tint-25: #f56f1019;
+  --red-tint-25: #d60e0019;
+
+  --blue-tint-08: #0099e508;
+  --green-tint-08: #48a82a08;
+  --yellow-tint-08: #ffd50008;
+  --orange-tint-08: #f56f1008;
+  --red-tint-08: #d60e0008;
+
+  --shadow: #171b1f10;
+  --overlay: #ffffff5a;
+  --overlay-dark: #262c3310;
+
+  --heb-red-primary: #e1251b;
+  --heb-red-dark: #b62a1c;
+  --heb-red-light: #e05343;
+
+  /** Text Styles **/
+  --heading-1-weight: 800;
+  --heading-1-size: 3rem;
+  --heading-1-line-height: 3.5rem;
+
+  --heading-2-weight: 800;
+  --heading-2-size: 2.25rem;
+  --heading-2-line-height: 2.75rem;
+
+  --heading-3-weight: 800;
+  --heading-3-size: 1.625rem;
+  --heading-3-line-height: 2.125rem;
+
+  --heading-4-weight: 800;
+  --heading-4-size: 1.25rem;
+  --heading-4-line-height: 1.75rem;
+
+  --heading-5-weight: 800;
+  --heading-5-size: 1rem;
+  --heading-5-line-height: 1.5rem;
+
+  --heading-6-weight: 800;
+  --heading-6-size: 0.75rem;
+  --heading-6-line-height: 1.25rem;
+
+  --title-weight: 600;
+  --title-size: 1rem;
+  --title-line-height: 1.5rem;
+  --title-light-weight: 500;
+
+  --body-weight: 500;
+  --body-size: 0.875rem;
+  --body-line-height: 1.375rem;
+  --body-weight-bold: 600;
+
+  --caption-weight: 500;
+  --caption-size: 0.75rem;
+  --caption-line-height: 1.25rem;
+  --caption-weight-bold: 600;
+
+  /** Shadows **/
+  --shadow-low: 0px 1px 4px 0px #171b1f29;
+  --shadow-medium: 0px 2px 8px 0px #171b1f29;
+  --shadow-high: 0px 4px 16px 0px #171b1f29;
+  --shadow-extra-high: 0px 8px 32px 0px #171b1f29;
+
+  /** Spacing **/
+  --space-4: 0.25rem;
+  --space-8: 0.5rem;
+  --space-16: 1rem;
+  --space-24: 1.5rem;
+  --space-32: 2rem;
+  --space-48: 3rem;
+  --space-64: 4rem;
+  --space-80: 5rem;
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --blue-primary: #0e6eb4;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-primary: #1e2328;
+    --background-raised: #262c33;
+    --background-recessed: #191d22;
+
+    --foreground-primary: #f8f8f8;
+    --foreground-secondary: #bfc7cd;
+    --foreground-disabled: #515f6e;
+    --foreground-tint: #323b44;
+
+    --blue-primary: #49b3e6;
+    --green-primary: #91d37b;
+    --yellow-primary: #f33360;
+    --red-primary: #d60e00;
+    --gold-primary: #ce9a42;
+    --gold-secondary: #f5c87d;
+
+    --blue-tint-75: #49b3e64b;
+    --green-tint-75: #91d37b4b;
+    --yellow-tint-75: #fee364B;
+    --red-tint-75: #ee62584b;
+
+    --blue-tint-25: #49b3e619;
+    --green-tint-25: #91d37b19;
+    --yellow-tint-25: #fee3619;
+    --red-tint-25: #ee625819;
+
+    --blue-tint-08: #49b3e608;
+    --green-tint-08: #91d37b08;
+    --yellow-tint-08: #fee3608;
+    --red-tint-08: #ee625808;
+
+    --shadow: #0b0d0f5f;
+    --overlay: #1e23285a;
+    --overlay-dark: #0b0d0f4b;
+
+    /** Shadows **/
+    --shadow-low: 0px 1px 4px 0px #0b0d0ff2;
+    --shadow-medium: 0px 2px 8px 0px #0b0d0ff2;
+    --shadow-high: 0px 4px 16px 0px #0b0d0ff2;
+    --shadow-extra-high: 0px 8px 32px 0px #0b0d0ff2;
+  }
+}
