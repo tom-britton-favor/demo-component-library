@@ -1,6 +1,6 @@
 // button.d.ts
 
-import { FvrButton } from "./FvrButton";
+import { FvrButton } from "./";
 
 declare global {
   interface HTMLElementTagNameMap {

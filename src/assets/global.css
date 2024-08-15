@@ -124,7 +124,8 @@ meter {
   --blue-primary: #0099e5;
   --green-primary: #48a82a;
   --yellow-primary: #ffd500;
-  --red-primary: #ee6258;
+  --orange-primary: #f56f10;
+  --red-primary: #d60e00;
   --gold-primary: #e2a243;
   --gold-secondary: #c0842b;
 
@@ -230,7 +231,7 @@ meter {
 
     --blue-primary: #49b3e6;
     --green-primary: #91d37b;
-    --yellow-primary: #f33360;
+    --yellow-primary: #fee360;
     --red-primary: #d60e00;
     --gold-primary: #ce9a42;
     --gold-secondary: #f5c87d;

@@ -1,0 +1,167 @@
+.fvrText {
+  font-size: .875rem;
+  font-weight: 500;
+  line-height: 1.375rem;
+  &.text-style-body {
+    font-size: var(--body-size);
+    font-weight: var(--body-weight);
+    line-height: var(--body-line-height);
+  }
+  &.text-style-body-bold {
+    font-size: var(--body-size); 
+    font-weight: var(--body-weight-bold);
+    line-height: var(--body-line-height);
+  }
+  &.text-style-title {
+    font-size: var(--title-size); 
+    font-weight: var(--title-weight);
+    line-height: var(--title-line-height);
+  }
+  &.text-style-title-light {
+    font-size: var(--title-size);
+    font-weight: var(--title-light-weight);
+    line-height: var(--title-line-height);
+  }
+  &.text-style-caption {
+    font-size: var(--caption-size); 
+    font-weight: var(--caption-weight);
+    line-height: var(--caption-line-height);
+  }
+  &.text-style-caption-bold {
+    font-size: var(--caption-size); 
+    font-weight: var(--caption-weight-bold);
+    line-height: var(--caption-line-height);
+  }
+  &.text-style-heading-1 {
+    font-size: var(--heading-1-size);
+    font-weight: var(--heading-1-weight);
+    line-height: var(--heading-1-line-height);
+  }
+  &.text-style-heading-2 {
+    font-size: var(--heading-2-size); 
+    font-weight: var(--heading-2-weight);
+    line-height: var(--heading-2-line-height);
+  }
+  &.text-style-heading-3 {
+    font-size: var(--heading-3-size);
+    font-weight: var(--heading-3-weight);
+    line-height: var(--heading-3-line-height);
+  }
+  &.text-style-heading-4 {
+    font-size: var(--heading-4-size); 
+    font-weight: var(--heading-4-weight);
+    line-height: var(--heading-4-line-height);
+  }
+  &.text-style-heading-5 {
+    font-size: var(--heading-5-size); 
+    font-weight: var(--heading-5-weight);
+    line-height: var(--heading-5-line-height);
+  }
+  &.text-style-heading-6 {
+    font-size: var(--heading-6-size);
+    font-weight: var(--heading-6-weight);
+    line-height: var(--heading-6-line-height);
+  }
+  &.text-style-heading-6-allcaps {
+    font-size: var(--heading-6-size); 
+    font-weight: var(--heading-6-weight);
+    line-height: var(--heading-6-line-height);
+    text-transform: uppercase;
+  }
+  &.color-background-primary {
+    color: var(--background-primary);
+  }
+  &.color-background-raised {
+    color: var(--background-raised);
+  }
+  &.color-background-recessed {
+    color: var(--background-recessed);
+  }
+  &.color-foreground-primary {
+    color: var(--foreground-primary);
+  }
+  &.color-foreground-secondary {
+    color: var(--foreground-secondary);
+  }
+  &.color-foreground-disabled {
+    color: var(--foreground-disabled);
+  }
+  &.color-foreground-tint {
+    color: var(--foreground-tint);
+  }
+  &.color-blue-primary {
+    color: var(--blue-primary);
+  }
+  &.color-green-primary {
+    color: var(--green-primary);
+  }
+  &.color-yellow-primary {
+    color: var(--yellow-primary);
+  }
+  &.color-orange-primary {
+    color: var(--orange-primary);
+  }
+  &.color-red-primary {
+    color: var(--red-primary);
+  }
+  &.color-gold-primary {
+    color: var(--gold-primary);
+  }
+  &.color-gold-secondary {
+    color: var(--gold-secondary);
+  }
+  &.color-blue-tint-75 {
+    color: var(--blue-tint-75);
+  }
+  &.color-green-tint-75 {
+    color: var(--green-tint-75);
+  }
+  &.color-yellow-tint-75 {
+    color: var(--yellow-tint-75);
+  }
+  &.color-orange-tint-75 {
+    color: var(--orange-tint-75);
+  }
+  &.color-red-tint-75 {
+    color: var(--red-tint-75);
+  }
+  &.color-blue-tint-25 {
+    color: var(--blue-tint-25);
+  }
+  &.color-green-tint-25 {
+    color: var(--green-tint-25);
+  }
+  &.color-yellow-tint-25 {
+    color: var(--yellow-tint-25);
+  }
+  &.color-orange-tint-25 {
+    color: var(--orange-tint-25);
+  }
+  &.color-red-tint-25 {
+    color: var(--red-tint-25);
+  }
+  &.color-blue-tint-08 {
+    color: var(--blue-tint-08);
+  }
+  &.color-green-tint-08 {
+    color: var(--green-tint-08);
+  }
+  &.color-yellow-tint-08 {
+    color: var(--yellow-tint-08);
+  }
+  &.color-orange-tint-08 {
+    color: var(--orange-tint-08);
+  }
+  &.color-red-tint-08 {
+    color: var(--red-tint-08);
+  }
+  &.color-heb-red-primary {
+    color: var(--heb-red-primary);
+  }
+  &.color-heb-red-dark {
+    color: var(--heb-red-dark);
+  }
+  &.color-heb-red-light {
+    color: var(--heb-red-light);
+  }
+}

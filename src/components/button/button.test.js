@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
-import { FvrButton, registerFvrButton } from "./";
+import { registerFvrButton } from "./";
 
 // Extend expect with jest-dom matchers
 import "@testing-library/jest-dom";
