@@ -1,10 +1,8 @@
 import spinnerIcon from "../../assets/icons/spinner.svg";
 import styles from "./button.css?inline";
 
-/**
- * @typedef {"primary" | "secondary" | "tertiary"} DisplayType
- * @typedef {"default" | "destructive"} ActionType
- */
+type DisplayType = "primary" | "secondary" | "tertiary";
+type ActionType = "default" | "destructive";
 
 /**
  * Custom button element with configurable display type, action type, and loading state.
@@ -19,6 +17,11 @@ import styles from "./button.css?inline";
  * @fires FvrButton#click - Fired when the button is clicked (unless disabled or loading)
  */
 class FvrButton extends HTMLElement {
+  private displayType: DisplayType;
+  private disabled: boolean;
+  private loading: boolean;
+  private actionType: ActionType;
+
   /**
    * Creates an instance of FvrButton.
    * Initializes the shadow DOM and sets up initial property values.
@@ -26,17 +29,17 @@ class FvrButton extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
-    this.displayType = this.getAttribute("display-type") || "primary";
-    this.disabled = this.hasAttribute("disabled") || false;
-    this.loading = this.hasAttribute("loading") || false;
-    this.actionType = this.getAttribute("action-type") || "default";
+    this.displayType = (this.getAttribute("display-type") as DisplayType) || "primary";
+    this.disabled = this.hasAttribute("disabled");
+    this.loading = this.hasAttribute("loading");
+    this.actionType = (this.getAttribute("action-type") as ActionType) || "default";
   }
 
   /**
    * Specifies the attributes to observe for changes.
    * @returns {string[]} An array of attribute names to observe
    */
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return ["display-type", "disabled", "loading", "action-type"];
   }
 
@@ -46,12 +49,11 @@ class FvrButton extends HTMLElement {
    * @param {string} oldValue - The previous value of the attribute
    * @param {string} newValue - The new value of the attribute
    */
-  attributeChangedCallback(name, oldValue, newValue) {
+  attributeChangedCallback(name: string, oldValue: string, newValue: string): void {
     if (oldValue === newValue) return;
-
     switch (name) {
       case "display-type":
-        this.displayType = newValue || "primary";
+        this.displayType = (newValue as DisplayType) || "primary";
         break;
       case "disabled":
         this.disabled = this.hasAttribute("disabled");
@@ -60,7 +62,7 @@ class FvrButton extends HTMLElement {
         this.loading = this.hasAttribute("loading");
         break;
       case "action-type":
-        this.actionType = newValue || "default";
+        this.actionType = (newValue as ActionType) || "default";
         break;
     }
     this.render();
@@ -70,7 +72,7 @@ class FvrButton extends HTMLElement {
    * Lifecycle callback when the element is added to the DOM.
    * Initializes the button's rendered state.
    */
-  connectedCallback() {
+  connectedCallback(): void {
     this.render();
   }
 
@@ -78,12 +80,12 @@ class FvrButton extends HTMLElement {
    * Renders the button's HTML structure and applies current state.
    * @private
    */
-  render() {
-    this.shadowRoot.innerHTML = `
+  private render(): void {
+    this.shadowRoot!.innerHTML = `
       <style>${styles}</style>
       <button
         class="fvrBtn displayType-${this.displayType}${this.loading ? " loading" : ""} actionType-${this.actionType}"
-        ${this.disabled || this.loading ? " disabled" : ""}
+        ${this.disabled || this.loading ? "disabled" : ""}
       >
         <span class="buttonLabel">
           <slot></slot>
@@ -98,7 +100,7 @@ class FvrButton extends HTMLElement {
  * Registers the FvrButton custom element with the browser.
  * Call this function to make <fvr-button> available in HTML.
  */
-const registerFvrButton = (customElementRegistry = window.customElements) => {
+const registerFvrButton = (customElementRegistry: CustomElementRegistry = window.customElements): void => {
   if (!customElementRegistry.get("fvr-button")) {
     customElementRegistry.define("fvr-button", FvrButton);
   }
