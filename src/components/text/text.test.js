@@ -19,7 +19,7 @@ describe("FvrText", () => {
   });
 
   it("should render with default attributes", () => {
-    const shadowElement = element.shadowRoot.querySelector(element.element);
+    const shadowElement = element.shadowRoot.querySelector('.fvrText');
     expect(shadowElement).toBeInTheDocument();
     expect(shadowElement).toHaveClass("fvrText");
     expect(shadowElement).toHaveClass("color-foreground-primary");
@@ -34,13 +34,13 @@ describe("FvrText", () => {
 
   it("should update text-style when attribute changes", () => {
     element.setAttribute("text-style", "heading-1");
-    const shadowElement = element.shadowRoot.querySelector(element.element);
+    const shadowElement = element.shadowRoot.querySelector('.fvrText');
     expect(shadowElement).toHaveClass("text-style-heading-1");
   });
 
   it("should update color when attribute changes", () => {
     element.setAttribute("color", "blue-primary");
-    const shadowElement = element.shadowRoot.querySelector(element.element);
+    const shadowElement = element.shadowRoot.querySelector('.fvrText');
     expect(shadowElement).toHaveClass("color-blue-primary");
   });
 

@@ -20,7 +20,8 @@
     "test": "vitest",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "build": "vite build"
+    "build": "vite build",
+    "generate": "node generator.cjs"
   },
   "keywords": [],
   "author": "",
