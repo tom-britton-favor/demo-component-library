@@ -3,6 +3,7 @@ import styles from "./COMPONENT_NAME.css?inline";
 class FvrCOMPONENT_NAME_PASCAL extends HTMLElement {
   constructor() {
     super();
+    this.attachShadow({ mode: "open" });
   }
 
   /**
@@ -38,7 +39,7 @@ class FvrCOMPONENT_NAME_PASCAL extends HTMLElement {
    * @private
    */
   private render(): void {
-    this.shadowRoot!.innerHTML = `
+    this.shadowRoot.innerHTML = `
       <style>${styles}</style>
       <div
         class="COMPONENT_NAME"

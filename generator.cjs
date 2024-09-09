@@ -31,8 +31,10 @@ const componentDir = path.join(__dirname, "src", "components", componentName);
 fs.mkdirSync(componentDir, { recursive: true });
 
 const templates = [
-  { name: `${componentName}.ts`, template: "index" },
+  { name: `index.ts`, template: "index" },
   { name: `${componentName}.css`, template: "css" },
+  { name: `${componentName}.stories.ts`, template: "stories" },
+  { name: `${componentName}.test.ts`, template: "test" },
 ];
 
 templates.forEach(({ name, template }) => {

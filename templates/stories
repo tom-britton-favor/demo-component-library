@@ -1,0 +1,20 @@
+import { registerFvrCOMPONENT_NAME_PASCAL} from "./";
+
+registerFvrCOMPONENT_NAME_PASCAL();
+
+const renderCOMPONENT_NAME_PASCAL = (args) => `<fvr-COMPONENT_NAME></fvr-COMPONENT_NAME>`;
+
+
+// More on how to set up stories at: https://storybook.js.org/docs/writing-stories
+export default {
+  title: "Favor/COMPONENT_NAME_PASCAL",
+  tags: ["autodocs"],
+  render: (args) => renderCOMPONENT_NAME_PASCAL(args),
+  argsTypes: {},
+  args: {}
+}
+
+// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
+export const ExampleCOMPONENT_NAME_PASCAL = {
+  args: {}
+};
