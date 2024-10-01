@@ -1,0 +1,20 @@
+.modal {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: var(--background-primary);
+  padding: .5rem 1rem 1.5rem 1rem;
+  width: 100%;
+  border-radius: 16px;
+
+
+  &.inline {
+    width: 80%;
+  }
+
+  @media (min-width: 40rem) {
+    &.inline {
+      width: 35rem;
+    }
+  }
+}

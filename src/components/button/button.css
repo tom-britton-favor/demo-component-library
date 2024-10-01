@@ -1,3 +1,7 @@
+:host {
+  display: flex;
+}
+
 .fvrBtn {
   border: none;
   padding: var(--space-16) var(--space-48);
@@ -15,13 +19,18 @@
   border-radius: 8px;
   color: var(--background-primary);
   position: relative;
+  flex-grow: 1;
+
+  @media (min-width: 40rem) {
+    flex-grow: 0;
+  }
 }
 
 .fvrBtn:hover:not(:disabled) {
   transform: scale(1.02);
 }
 
-.fvrBtn > .spinner {
+.fvrBtn>.spinner {
   position: absolute;
   right: 1rem;
   width: 1rem;
@@ -83,6 +92,6 @@
   color: var(--red-tint-75);
 }
 
-.fvrBtn.displayType-tertiary:disabled.loading > .buttonLabel {
+.fvrBtn.displayType-tertiary:disabled.loading>.buttonLabel {
   display: none;
 }

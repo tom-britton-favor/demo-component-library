@@ -1,0 +1,64 @@
+import styles from "./button-group.css?inline";
+
+class FvrButtongroup extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+  }
+
+  /**
+   * Specifies the attributes to observe for changes.
+   * @returns {string[]} An arrof attribute names to observe.
+   */
+  static get observedAttributes(): string[] {
+    return [];
+  }
+
+
+  /**
+   * Handles changes to observed attributes.
+   * @param {string} name - The name of the attribute that changed
+   * @param {string} oldValue - The previous value of the attribute
+   * @param {string} newValue - The new value of the attribute
+   */
+  attributeChangedCallback(name: string, oldValue: string, newValue: string): void {
+    if (oldValue === newValue) return;
+    this.render();
+  }
+
+  /**
+   * Lifecycle callback when the element is added to the DOM.
+   * Initializes the button's rendered state.
+   */
+  connectedCallback(): void {
+    this.render();
+  }
+
+  /**
+   * Renders the button's HTML structure and applies current state.
+   * @private
+   */
+  private render(): void {
+    this.shadowRoot.innerHTML = `
+      <style>${styles}</style>
+      <div
+        class="button-group"
+      >
+        <slot></slot>
+      </div>
+    `;
+  }
+}
+
+
+/**
+ * Registers the custom element with the browser.
+ * Call this function to make <fvr-button> available in HTML.
+ */
+const registerFvrButtongroup = (customElementRegistry: CustomElementRegistry = window.customElements): void => {
+  if (!customElementRegistry.get("fvr-button-group")) {
+    customElementRegistry.define("fvr-button-group", FvrButtongroup);
+  }
+};
+
+export { FvrButtongroup, registerFvrButtongroup };

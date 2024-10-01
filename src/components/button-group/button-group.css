@@ -1,0 +1,13 @@
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex-grow: 1;
+}
+
+@media (min-width: 40rem) {
+  .button-group {
+    flex-direction: row-reverse;
+    justify-items: flex-end;
+  }
+}
