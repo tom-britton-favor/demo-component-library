@@ -1,5 +1,6 @@
 :host {
-  display: flex;
+  /* !important to override style in the global reset */
+  display: flex !important;
 }
 
 .fvrBtn {
