@@ -2,9 +2,11 @@ import styles from "./modal.css?inline";
 import { registerFvrText } from "../text";
 import { registerFvrButton } from "../button";
 
+type ModalType = 'inline' | 'mobile-full-screen' | 'mobile-bottom-aligned';
+
 class FvrModal extends HTMLElement {
   private isOpen: boolean;
-  private modalType: 'inline' | 'mobile-full-screen' | 'mobile-bottom-aligned';
+  private modalType: ModalType;
   private modalTitle = 'Modal Title';
   private dialogElement: HTMLDialogElement;
   private pendingOpen = false;
@@ -46,11 +48,10 @@ class FvrModal extends HTMLElement {
         this.updateModalContent();
         break;
       case 'modal-type':
-        this.modalType = newValue as any;
+        this.modalType = newValue as ModalType;
         this.updateModalContent();
         break;
     }
-    this.render();
   }
 
   /**
@@ -59,7 +60,7 @@ class FvrModal extends HTMLElement {
    */
   connectedCallback(): void {
     this.isOpen = this.hasAttribute('open');
-    this.modalType = (this.getAttribute('modal-type') as any) || 'inline';
+    this.modalType = (this.getAttribute('modal-type') as ModalType) || 'inline';
     this.modalTitle = this.getAttribute('title') || 'Modal Title';
     
     registerFvrText();
@@ -106,14 +107,10 @@ class FvrModal extends HTMLElement {
     this.shadowRoot.innerHTML = `
       <style>
         ${styles}
-        :host {
-          --backdrop-color: var(--overlay, rgba(0, 0, 0, 0.5));
-        }
       </style>
       <dialog
         class="modal ${this.modalType || 'inline'}"
       >
-        <slot name="modal-image"></slot>
         <fvr-text id="fvr-modal-title" element="h2" text-style="heading-4">${this.modalTitle}</fvr-text>
         <slot name="modal-body"></slot>
         <slot name="modal-buttons"></slot>

@@ -1,14 +1,50 @@
+/* https://frontendmasters.com/blog/animating-dialog/ */
+
+@keyframes open {
+  from {
+    opacity: 0;
+    transform: scale(.8) translateY(-50%);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(-50%);
+  }
+}
+
+@keyframes close {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(-50%);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(.8) translateY(-50%);
+  }
+}
+
 .modal {
-  position: absolute;
+  position: fixed;
   top: 50%;
-  transform: translateY(-50%);
+  opacity: 0;
   background-color: var(--background-primary);
   padding: .5rem 1rem 1.5rem 1rem;
   width: 100%;
   border-radius: 16px;
+  animation: close 200ms forwards;
+  transition:
+    display 200ms allow-discrete,
+    overlay 200ms allow-discrete;
+
 
   &::backdrop {
     background-color: var(--overlay);
+    cursor: not-allowed;
+  }
+
+  &[open] {
+    animation: open 200ms forwards;
   }
 
   &.inline {
