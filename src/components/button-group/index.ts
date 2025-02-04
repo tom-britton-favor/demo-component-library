@@ -1,6 +1,6 @@
 import styles from "./button-group.css?inline";
 
-class FvrButtongroup extends HTMLElement {
+class FvrButtonGroup extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -55,10 +55,10 @@ class FvrButtongroup extends HTMLElement {
  * Registers the custom element with the browser.
  * Call this function to make <fvr-button> available in HTML.
  */
-const registerFvrButtongroup = (customElementRegistry: CustomElementRegistry = window.customElements): void => {
+const registerFvrButtonGroup = (customElementRegistry: CustomElementRegistry = window.customElements): void => {
   if (!customElementRegistry.get("fvr-button-group")) {
-    customElementRegistry.define("fvr-button-group", FvrButtongroup);
+    customElementRegistry.define("fvr-button-group", FvrButtonGroup);
   }
 };
 
-export { FvrButtongroup, registerFvrButtongroup };
+export { FvrButtonGroup, registerFvrButtonGroup };
