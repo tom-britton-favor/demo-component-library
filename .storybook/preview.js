@@ -1,6 +1,9 @@
 /** @type { import('@storybook/web-components').Preview } */
 
 import "../src/assets/global.css";
+import registerComponents from "../src/index";
+
+registerComponents();
 
 const preview = {
   parameters: {

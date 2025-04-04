@@ -2,15 +2,15 @@ import styles from "./modal.css?inline";
 import { registerFvrText } from "../text";
 import { registerFvrButton } from "../button";
 
-type ModalType = 'inline' | 'mobile-full-screen' | 'mobile-bottom-aligned';
+type ModalType = "inline" | "mobile-full-screen" | "mobile-bottom-aligned";
 
 class FvrModal extends HTMLElement {
   private isOpen: boolean;
   private modalType: ModalType;
-  private modalTitle = 'Modal Title';
+  private modalTitle = "Modal Title";
   private dialogElement: HTMLDialogElement;
   private pendingOpen = false;
-  
+
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -21,9 +21,8 @@ class FvrModal extends HTMLElement {
    * @returns {string[]} An arrof attribute names to observe.
    */
   static get observedAttributes(): string[] {
-    return ['open', 'modal-type', 'title'];
+    return ["open", "modal-type", "title"];
   }
-
 
   /**
    * Handles changes to observed attributes.
@@ -31,11 +30,15 @@ class FvrModal extends HTMLElement {
    * @param {string} oldValue - The previous value of the attribute
    * @param {string} newValue - The new value of the attribute
    */
-  attributeChangedCallback(name: string, oldValue: string, newValue: string): void {
+  attributeChangedCallback(
+    name: string,
+    oldValue: string,
+    newValue: string,
+  ): void {
     if (oldValue === newValue) return;
     switch (name) {
-      case 'open':
-        this.isOpen = this.hasAttribute('open');
+      case "open":
+        this.isOpen = this.hasAttribute("open");
         // Unintuitively the attributeChangedCallback executes before connectedCallback.
         if (this.dialogElement) {
           this.updateModalState();
@@ -43,11 +46,11 @@ class FvrModal extends HTMLElement {
           this.pendingOpen = this.isOpen;
         }
         break;
-      case 'title':
+      case "title":
         this.modalTitle = newValue;
         this.updateModalContent();
         break;
-      case 'modal-type':
+      case "modal-type":
         this.modalType = newValue as ModalType;
         this.updateModalContent();
         break;
@@ -59,15 +62,15 @@ class FvrModal extends HTMLElement {
    * Initializes the button's rendered state.
    */
   connectedCallback(): void {
-    this.isOpen = this.hasAttribute('open');
-    this.modalType = (this.getAttribute('modal-type') as ModalType) || 'inline';
-    this.modalTitle = this.getAttribute('title') || 'Modal Title';
-    
+    this.isOpen = this.hasAttribute("open");
+    this.modalType = (this.getAttribute("modal-type") as ModalType) || "inline";
+    this.modalTitle = this.getAttribute("title") || "Modal Title";
+
     registerFvrText();
     registerFvrButton();
-    
+
     this.render();
-    this.dialogElement = this.shadowRoot.querySelector('dialog');
+    this.dialogElement = this.shadowRoot.querySelector("dialog");
 
     if (this.pendingOpen) {
       this.updateModalState();
@@ -78,8 +81,8 @@ class FvrModal extends HTMLElement {
   private updateModalState(): void {
     if (!this.dialogElement) {
       return;
-    } 
-    
+    }
+
     if (this.isOpen) {
       this.dialogElement.showModal();
     } else {
@@ -90,12 +93,12 @@ class FvrModal extends HTMLElement {
   private updateModalContent(): void {
     if (!this.dialogElement) {
       return;
-    } 
-    
-    this.dialogElement.className = `modal ${this.modalType || 'inline'}`;
-    const titleElement = this.shadowRoot.getElementById('fvr-modal-title');
+    }
+
+    this.dialogElement.className = `modal ${this.modalType || "inline"}`;
+    const titleElement = this.shadowRoot.getElementById("fvr-modal-title");
     if (titleElement) {
-      titleElement.setAttribute('text-content', this.modalTitle);
+      titleElement.setAttribute("text-content", this.modalTitle);
     }
   }
 
@@ -109,7 +112,7 @@ class FvrModal extends HTMLElement {
         ${styles}
       </style>
       <dialog
-        class="modal ${this.modalType || 'inline'}"
+        class="modal ${this.modalType || "inline"}"
       >
         <fvr-text id="fvr-modal-title" element="h2" text-style="heading-4">${this.modalTitle}</fvr-text>
         <slot name="modal-body"></slot>
@@ -119,12 +122,13 @@ class FvrModal extends HTMLElement {
   }
 }
 
-
 /**
  * Registers the custom element with the browser.
  * Call this function to make <fvr-button> available in HTML.
  */
-const registerFvrModal = (customElementRegistry: CustomElementRegistry = window.customElements): void => {
+const registerFvrModal = (
+  customElementRegistry: CustomElementRegistry = window.customElements,
+): void => {
   if (!customElementRegistry.get("fvr-modal")) {
     customElementRegistry.define("fvr-modal", FvrModal);
   }

@@ -1,13 +1,6 @@
-import { registerFvrModal} from "./";
-import { registerFvrButton } from "../button";
-import { registerFvrButtongroup } from "../button-group";
-import { registerFvrText } from "../text";
-registerFvrModal();
-registerFvrButtongroup();
-registerFvrButton();
-registerFvrText();
-
-const renderModal = (args) => `<fvr-modal ${args.open ? 'open' : ''} title="${args.title}">
+const renderModal = (
+  args,
+) => `<fvr-modal ${args.open ? "open" : ""} title="${args.title}">
   <div slot="modal-body">
     <fvr-text>${args.modalBody}</fvr-text> 
   </div>
@@ -21,7 +14,6 @@ const renderModal = (args) => `<fvr-modal ${args.open ? 'open' : ''} title="${ar
     </fvr-button>
   </fvr-button-group>
 </fvr-modal>`;
-
 
 const renderAnimatedModal = (args) => `
 <fvr-button id="open">Open Modal</fvr-button>
@@ -64,24 +56,26 @@ export default {
   render: (args) => renderModal(args),
   argsTypes: {},
   args: {
-    open: true
-  }
-}
+    open: true,
+  },
+};
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const ExampleModal = {
   args: {
     open: true,
-    modalBody: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris pellentesque lobortis libero, sed fringilla orci maximus non. Pellentesque sit amet elementum tellus, et tincidunt enim.',
-    title: 'Modal Title'
-  }
+    modalBody:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris pellentesque lobortis libero, sed fringilla orci maximus non. Pellentesque sit amet elementum tellus, et tincidunt enim.",
+    title: "Modal Title",
+  },
 };
 
 export const AnimationExample = {
   render: (args) => renderAnimatedModal(args),
   args: {
     open: false,
-    modalBody: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris pellentesque lobortis libero, sed fringilla orci maximus non. Pellentesque sit amet elementum tellus, et tincidunt enim.',
-    title: 'Animated Modal Example'
-  }
-}
+    modalBody:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris pellentesque lobortis libero, sed fringilla orci maximus non. Pellentesque sit amet elementum tellus, et tincidunt enim.",
+    title: "Animated Modal Example",
+  },
+};
