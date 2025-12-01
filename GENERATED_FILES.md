@@ -1,0 +1,342 @@
+# Generated Files - Structure & Watch Mode
+
+## Overview
+
+TypeScript declarations and React wrappers are **automatically generated** and stored in `src/generated/`.
+
+## Directory Structure
+
+```
+src/
+├── components/          # Your component source code (EDIT THESE)
+│   ├── button/
+│   ├── modal/
+│   └── text/
+├── generated/          # Auto-generated files (DO NOT EDIT)
+│   ├── jsx.d.ts       # TypeScript JSX declarations
+│   └── react.tsx      # React wrapper components
+└── index.js           # Main library entry
+```
+
+## Generated Files Location
+
+### ✅ src/generated/ (Current Setup)
+
+**Generated files are in:**
+- `src/generated/jsx.d.ts`
+- `src/generated/react.tsx`
+
+**Benefits:**
+- ✅ Clearly separated from source code
+- ✅ Added to `.gitignore` (not tracked)
+- ✅ IDE can find types during development
+- ✅ Regenerated automatically on component changes
+
+## Gitignore
+
+Generated files are **not tracked** in git:
+
+```gitignore
+# .gitignore
+src/generated/
+```
+
+This means:
+- Generated files won't show up in `git status`
+- Won't be committed to the repository
+- Each developer generates them locally
+- CI/CD must run `npm run generate:types` before building
+
+## Commands
+
+### Manual Generation
+
+```bash
+# Generate types once
+npm run generate:types
+```
+
+### Watch Mode (Auto-Regeneration)
+
+```bash
+# Watch component files and auto-regenerate on changes
+npm run generate:watch
+```
+
+**Watch mode output:**
+```
+👀 Watching for component changes...
+📂 Watching: /path/to/src/components
+
+⚡ Regenerating types...
+🔍 Scanning components...
+  ✓ Found component: button
+  ✓ Found component: modal
+  ✓ Found component: text
+
+📝 Generating files for 3 components...
+  ✓ Generated: src/generated/jsx.d.ts
+  ✓ Generated: src/generated/react.tsx
+
+✨ Code generation complete!
+✅ Types regenerated successfully
+
+Press Ctrl+C to stop watching
+
+📝 Changed: button/index.ts
+⚡ Regenerating types...
+...
+```
+
+### Build (Includes Generation)
+
+```bash
+# Automatically generates types before building
+npm run build
+```
+
+Build process:
+1. ✅ Runs `generate:types`
+2. ✅ Builds main library
+3. ✅ Builds React library
+
+## Development Workflow
+
+### Option 1: Watch Mode (Recommended)
+
+```bash
+# Terminal 1: Watch and regenerate types
+npm run generate:watch
+
+# Terminal 2: Run Storybook or dev server
+npm run storybook
+```
+
+Every time you edit a component file, types automatically regenerate!
+
+### Option 2: Manual Generation
+
+```bash
+# 1. Edit component
+vim src/components/button/index.ts
+
+# 2. Regenerate types
+npm run generate:types
+
+# 3. Continue development
+```
+
+## When Types Regenerate
+
+Types regenerate automatically when:
+
+✅ **Watch mode is running** AND you modify:
+- Any `.ts` file in `src/components/`
+- Component attributes (`observedAttributes`)
+- Type definitions
+- Const arrays
+
+❌ **Types DO NOT regenerate** for:
+- Test files (`*.test.ts`)
+- CSS files (`*.css`)
+- Story files (`*.stories.ts`)
+- Files outside `src/components/`
+
+## What Happens on Git Clone?
+
+When someone clones the repository:
+
+```bash
+git clone <repo>
+cd vite-web-component-library
+npm install
+
+# Generated files DON'T exist yet!
+# Must generate them:
+npm run generate:types
+
+# Or just build (which generates automatically):
+npm run build
+```
+
+## CI/CD Setup
+
+Your CI/CD pipeline must generate files before building:
+
+```yaml
+# Example: GitHub Actions
+steps:
+  - uses: actions/checkout@v3
+  - uses: actions/setup-node@v3
+  - run: npm install
+  - run: npm run build  # Includes generate:types
+```
+
+**Important:** Don't run `npm run build:main` or `npm run build:react` directly in CI. Always use `npm run build` which includes generation.
+
+## Troubleshooting
+
+### Generated Files Missing
+
+**Problem:** Import errors for `src/generated/jsx.d.ts` or `src/generated/react.tsx`
+
+**Solution:**
+```bash
+npm run generate:types
+```
+
+### Types Out of Sync
+
+**Problem:** TypeScript errors after modifying component attributes
+
+**Solution:**
+```bash
+npm run generate:types
+```
+
+### Watch Mode Not Working
+
+**Problem:** Changes to components don't trigger regeneration
+
+**Check:**
+1. Is watch mode running? (`npm run generate:watch`)
+2. Are you editing `.ts` files in `src/components/`?
+3. Are you editing test files? (These are ignored)
+
+**Solution:** Restart watch mode:
+```bash
+# Ctrl+C to stop
+npm run generate:watch
+```
+
+### Build Fails with "Cannot find module"
+
+**Problem:** Build fails looking for generated files
+
+**Solution:** Ensure generation runs first:
+```bash
+# Don't do this:
+npm run build:main  # ❌ Skips generation
+
+# Do this:
+npm run build       # ✅ Includes generation
+```
+
+## File Headers
+
+Generated files include a warning header:
+
+```typescript
+/**
+ * TypeScript JSX declarations for fvr- web components
+ * This file is AUTO-GENERATED by scripts/generate-types.cjs
+ * Do not edit manually - changes will be overwritten
+ */
+```
+
+**Never edit these files manually.** Changes will be overwritten on next generation.
+
+## Import Paths
+
+### For Consumers (Published Package)
+
+```typescript
+// Types
+import 'vite-web-component-library/jsx';
+
+// React wrappers
+import { Button } from 'vite-web-component-library/react';
+```
+
+### For Development (Within This Repo)
+
+```typescript
+// Types
+import '../src/generated/jsx.d.ts';
+
+// React wrappers
+import { Button } from '../src/generated/react.tsx';
+```
+
+## Package Exports
+
+The generated files are exported in `package.json`:
+
+```json
+{
+  "exports": {
+    "./jsx": {
+      "types": "./dist/types/generated/jsx.d.ts"
+    },
+    "./react": {
+      "import": "./dist/react.es.js",
+      "types": "./dist/types/generated/react.d.ts"
+    }
+  }
+}
+```
+
+## Benefits of This Structure
+
+✅ **Clean separation** - Source vs generated code
+✅ **Not in git** - Reduces repo size and merge conflicts
+✅ **Always fresh** - Regenerated from source
+✅ **IDE support** - TypeScript finds types during development
+✅ **Watch mode** - Auto-regenerate on changes
+✅ **Explicit** - Clear what's generated vs source
+
+## Comparison with Alternatives
+
+### Why not `dist/`?
+
+```
+❌ dist/generated/jsx.d.ts
+```
+
+**Problems:**
+- Need to build before development works
+- IDE can't find types without building first
+- Can't import from source during development
+
+### Why not root `generated/`?
+
+```
+❌ generated/jsx.d.ts
+```
+
+**Problems:**
+- Import paths become awkward
+- Not grouped with source code
+- Less clear it's related to `src/`
+
+### Why not keep in `src/`?
+
+```
+❌ src/jsx.d.ts
+❌ src/react.tsx
+```
+
+**Problems:**
+- Looks like source code
+- Easy to accidentally edit
+- Mixed with real source files
+
+## Summary
+
+- ✅ Generated files in `src/generated/`
+- ✅ Added to `.gitignore`
+- ✅ Watch mode for auto-regeneration
+- ✅ Regenerates on component file changes
+- ✅ Clear separation from source code
+- ✅ Must generate before first build after clone
+
+**Workflow:**
+```bash
+# Development with watch mode
+npm run generate:watch  # Terminal 1
+npm run storybook       # Terminal 2
+
+# Or manual
+npm run generate:types  # After editing components
+npm run build          # Includes generation
+```
